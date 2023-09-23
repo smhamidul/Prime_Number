@@ -30,6 +30,27 @@ public class MainActivity extends AppCompatActivity {
         button = findViewById(R.id.button);
         textView = findViewById(R.id.textView);
 
+        fromNumber.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (before>count){
+                    textView.setText("");
+                }else {
+                    textView.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         toNumber.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -38,7 +59,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                if (before<count){
+                    textView.setText("");
+                }else {
+                    textView.setText("");
+                }
             }
 
             @Override
@@ -52,6 +77,16 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (fromNumber.getText().toString().equals("")){
+                    fromNumber.setError("Input Your Number");
+                    fromNumber.requestFocus();
+                    return;
+                }
+                if (toNumber.getText().toString().equals("")){
+                    toNumber.setError("Input Your Number");
+                    toNumber.requestFocus();
+                    return;
+                }
                 textView.setText("");
                 prime = "";
                 int from = Integer.parseInt(fromNumber.getText().toString());
